@@ -1,15 +1,102 @@
 <html>
-  <head>
+
+<head>
     <title>salda.to</title>
     <style>
-      .img-container {
-        text-align: center;
-      }
+        .img-container {
+            text-align: center;
+        }
+        
+        .container {
+            margin: 150px auto;
+            max-width: 960px;
+        }
+        
+        .tick {
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            color: #3b5870;
+            width: 45%;
+            text-align: center;
+        }
+        
+        .tick-label {
+            font-size: .375em;
+            text-align: center;
+        }
+        
+        .tick-group {
+            margin: 0 .25em;
+            text-align: center;
+        }
     </style>
-  </head>
-  <body style="background-color:#eeeeee;">
-    <div class="img-container"> <!-- Block parent element -->
-      <img src="logo.png" alt="salda.to">
+    <script>
+        function handleTickInit(tick) {
+
+            // Uncomment to set labels to different language ( in this case Dutch )
+
+            var locale = {
+                YEAR_PLURAL: 'Anni',
+                YEAR_SINGULAR: 'Anno',
+                MONTH_PLURAL: 'Mesi',
+                MONTH_SINGULAR: 'Mese',
+                WEEK_PLURAL: 'Settimane',
+                WEEK_SINGULAR: 'Settimana',
+                DAY_PLURAL: 'Giorni',
+                DAY_SINGULAR: 'Giorno',
+                HOUR_PLURAL: 'Ore',
+                HOUR_SINGULAR: 'Ora',
+                MINUTE_PLURAL: 'Minuti',
+                MINUTE_SINGULAR: 'Minuto',
+                SECOND_PLURAL: 'Secondi',
+                SECOND_SINGULAR: 'Secondo',
+                MILLISECOND_PLURAL: 'Millisecondi',
+                MILLISECOND_SINGULAR: 'Millisecondo'
+            };
+
+            for (var key in locale) {
+                if (!locale.hasOwnProperty(key)) {
+                    continue;
+                }
+                tick.setConstant(key, locale[key]);
+            }
+
+
+            Tick.count.down('2021-06-02').onupdate = function(value) {
+                tick.value = value;
+            };
+
+        }
+    </script>
+    <link rel="stylesheet" href="js/flip.min.css" />
+    <script src="js/flip.min.js"></script>
+</head>
+
+<body style="background-color:#eeeeee;">
+    <div class="img-container">
+        <!-- Block parent element -->
+        <img src="logo.png" alt="salda.to">
     </div>
-  </body>
+
+    <div class="tick" data-did-init="handleTickInit">
+
+        <div data-repeat="true" data-layout="horizontal center fit" data-transform="preset(d, h, m, s) -> delay">
+
+            <div class="tick-group">
+
+                <div data-key="value" data-repeat="true" data-transform="pad(00) -> split -> delay">
+
+                    <span data-view="flip"></span>
+
+                </div>
+
+                <span data-key="label" data-view="text" class="tick-label"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
 </html>
