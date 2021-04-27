@@ -3,13 +3,13 @@
 <head>
     <title>salda.to 💳</title>
     <style>
-        .img-container {
-            text-align: center;
+        body {
+            margin: 0;
+            padding: 0;
         }
         
-        .container {
-            margin: 150px auto;
-            max-width: 960px;
+        .img-container {
+            text-align: center;
         }
         
         .tick {
@@ -18,6 +18,7 @@
             color: #3b5870;
             width: 70%;
             margin: auto;
+            margin-top: 50px;
         }
         
         .tick-label {
@@ -92,29 +93,30 @@
 </head>
 
 <body style="background-color:#eeeeee;">
-    <div class="img-container">
-        <!-- Block parent element -->
-        <img src="img/logo.png" alt="salda.to">
-    </div>
+    <div class="content">
+        <div class="img-container">
+            <!-- Block parent element -->
+            <img src="img/logo.png" alt="salda.to">
+        </div>
+        <div class="tick" data-did-init="handleTickInit">
 
-    <div class="tick" data-did-init="handleTickInit">
+            <div data-repeat="true" data-layout="horizontal center fit" data-transform="preset(d, h, m, s) -> delay">
 
-        <div data-repeat="true" data-layout="horizontal center fit" data-transform="preset(d, h, m, s) -> delay">
+                <div class="tick-group">
 
-            <div class="tick-group">
+                    <div data-key="value" data-repeat="true" data-transform="pad(00) -> split -> delay">
 
-                <div data-key="value" data-repeat="true" data-transform="pad(00) -> split -> delay">
+                        <span data-view="flip"></span>
 
-                    <span data-view="flip"></span>
+                    </div>
+
+                    <span data-key="label" data-view="text" class="tick-label"></span>
 
                 </div>
-
-                <span data-key="label" data-view="text" class="tick-label"></span>
 
             </div>
 
         </div>
-
     </div>
 </body>
 
